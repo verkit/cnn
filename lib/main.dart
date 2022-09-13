@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'home.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Fruit Recognition',
       home: Home(),
       debugShowCheckedModeBanner: false,
+      builder: EasyLoading.init(),
     );
   }
 }
