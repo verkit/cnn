@@ -98,17 +98,18 @@ class _HomeState extends State<Home> {
                   child: Container(
                     child: Column(
                       children: [
-                        Container(
-                          height: 250,
-                          width: 250,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: Image.file(
-                              _image,
-                              fit: BoxFit.fill,
+                        if (_image != null)
+                          Container(
+                            height: 250,
+                            width: 250,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(30),
+                              child: Image.file(
+                                _image,
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
-                        ),
                         Divider(
                           height: 25,
                           thickness: 1,
