@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   File _image;
-  String _output;
+  String _output, _prob;
   Dio dio = Dio();
   final picker = ImagePicker();
 
@@ -60,10 +60,12 @@ class _HomeState extends State<Home> {
       )
     });
 
-    var response = await dio.post('http://10.0.2.2:5000/predict', data: formData);
+    var host = Platform.isAndroid ? '10.0.2.2' : '127.0.0.1';
+    var response = await dio.post('http://$host:5000/predict', data: formData);
 
     setState(() {
-      _output = response.data['value'];
+      _output = response.data['output'][0];
+      _prob = response.data['probability'][0].toString();
     });
 
     EasyLoading.dismiss();
@@ -77,7 +79,12 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         title: Text(
           'Klasifikasi Paru',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w200, fontSize: 20, letterSpacing: 0.8),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w200,
+            fontSize: 20,
+            letterSpacing: 0.8,
+          ),
         ),
       ),
       body: Container(
@@ -116,9 +123,12 @@ class _HomeState extends State<Home> {
                         ),
                         _output != null
                             ? Text(
-                                'Terdeteksi: $_output!',
-                                // 'The object is: ${_output[0]['label']}!',
-                                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400),
+                                'Terdeteksi: $_prob% $_output!',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               )
                             : Container(),
                         Divider(
@@ -136,7 +146,10 @@ class _HomeState extends State<Home> {
                   width: MediaQuery.of(context).size.width - 200,
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 17),
-                  decoration: BoxDecoration(color: Colors.blueGrey[600], borderRadius: BorderRadius.circular(15)),
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey[600],
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: Text(
                     'Ambil dari galeri',
                     style: TextStyle(color: Colors.white, fontSize: 16),
