@@ -4,6 +4,7 @@
    <application
         android:label="cnn"
         android:icon="@mipmap/ic_launcher"
+        android:name="${applicationName}"
         android:requestLegacyExternalStorage="true" >
         <activity
             android:name=".MainActivity"
