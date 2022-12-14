@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cnn/extensions/strings.dart';
 import 'package:cnn/history.dart';
 import 'package:cnn/styles/colors.dart';
 import 'package:cnn/values.dart';
@@ -61,7 +62,7 @@ class _HistoryPageState extends State<HistoryPage> with TickerProviderStateMixin
     // SharedPreferences _pr = await SharedPreferences.getInstance();
     // var rawDatas = _pr.getStringList(F_HISTORY_KEY);
 
-    //  if (rawDatas != null) {
+    // if (rawDatas != null) {
     //   List<History> datas = rawDatas.map((e) => History.fromJson(e)).toList();
     //   var groupByDate = groupBy<History, String>(datas, (obj) => obj.createdAt.toIso8601String().substring(0, 10));
     //   groupByDate.forEach((date, list) {
@@ -84,6 +85,8 @@ class _HistoryPageState extends State<HistoryPage> with TickerProviderStateMixin
         });
       });
     }
+
+    groupedHistory.sort((a, b) => b.date.compareTo(a.date));
   }
 
   RefreshController _refreshController = RefreshController(initialRefresh: false);
@@ -155,7 +158,7 @@ class _HistoryPageState extends State<HistoryPage> with TickerProviderStateMixin
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(history.disease),
+                                      Text(history.disease.capitalize),
                                       Text(
                                         'Checked At : ' + history.createdAt.time(),
                                         style: TextStyle(fontSize: 12, color: AppColor.gray),

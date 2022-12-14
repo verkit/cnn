@@ -19,11 +19,11 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 12),
             Text(
-              'Made with Love By',
+              'Built with Love By',
               style: TextStyle(fontWeight: FontWeight.w700),
             ),
             Text('Verdy Bangkit Yudho Negoro'),
-            Text('NIM.172410101081'),
+            Text('NIM. 172410101081'),
             SizedBox(height: 12),
             Text('Sistem Informasi'),
             Text('Fakultas Ilmu Komputer'),

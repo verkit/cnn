@@ -69,28 +69,28 @@ class _ClassifyPageState extends State<ClassifyPage> {
 
     // TODO: Uncomment this section
     // var host = Platform.isAndroid ? '10.0.2.2' : '127.0.0.1';
-    // var response = await dio.post('http://$host:5000/predict', data: formData);
+    var response = await dio.post('http://10.132.12.4:1234/predict', data: formData);
 
-    // setState(() {
-    //   _output = response.data['output'][0];
-    //   _prob = response.data['probability'][0];
-    //   _status = '66% Image has been identified';
-    // });
-    // recordData();
+    setState(() {
+      _output = response.data['output'][0];
+      _prob = response.data['probability'][0];
+      _status = '66% Image has been identified';
+    });
+    recordData();
 
     // TODO: Remove this section later
 
-    await Future.delayed(
-      Duration(seconds: 3),
-      () {
-        setState(() {
-          _output = 'Playground';
-          _prob = random(10, 100).toDouble();
-          _status = '66% Image has been identified';
-        });
-        recordData();
-      },
-    );
+    // await Future.delayed(
+    //   Duration(seconds: 3),
+    //   () {
+    //     setState(() {
+    //       _output = 'Playground';
+    //       _prob = random(10, 100).toDouble();
+    //       _status = '66% Image has been identified';
+    //     });
+    //     recordData();
+    //   },
+    // );
     ///////
   }
 
